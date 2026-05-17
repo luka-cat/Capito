@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Capito — Coffee, Bakery & Pizza | Бишкек</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231A1A1A'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia%2Cserif' font-size='36' font-weight='700' fill='%23C4A882'%3EC%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Manrope:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
@@ -188,8 +189,13 @@ header.scrolled .burger span{background:var(--dark);}
 .cart-total{display:flex;justify-content:space-between;margin-bottom:16px;}
 .cart-total span:first-child{font-size:0.9rem;color:var(--muted);}
 .cart-total span:last-child{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.1rem;}
-.btn-checkout{width:100%;background:#25D366;color:var(--white);border:none;font-family:'Montserrat',sans-serif;font-size:0.85rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:15px;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;justify-content:center;gap:8px;}
-.btn-checkout:hover{background:#128C7E;}
+.btn-checkout{width:100%;border:none;font-family:'Montserrat',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:13px;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-checkout--glovo{background:#00A082;color:#fff;}
+.btn-checkout--glovo:hover{background:#008a6d;}
+.btn-checkout--yandex{background:#FC3F1D;color:#fff;}
+.btn-checkout--yandex:hover{background:#e03515;}
+.btn-checkout--wa{background:#25D366;color:#fff;}
+.btn-checkout--wa:hover{background:#128C7E;}
 
 /* ─── BRANCHES DRAWER ─── */
 .branches-overlay{position:fixed;inset:0;background:rgba(0,0,0,0);z-index:400;display:none;}
@@ -301,9 +307,9 @@ footer ul li a:hover{color:var(--caramel);}
 <header id="header">
   <a class="logo" href="#">Cap<span>i</span>to</a>
   <nav id="nav">
-    <a onclick="scrollTo('#menu')">Меню</a>
-    <a onclick="scrollTo('#delivery')">Доставка</a>
-    <a onclick="scrollTo('#about')">О нас</a>
+    <a onclick="smoothScrollTo('#menu');closeMobileMenu()">Меню</a>
+    <a onclick="smoothScrollTo('#delivery');closeMobileMenu()">Доставка</a>
+    <a onclick="smoothScrollTo('#about');closeMobileMenu()">О нас</a>
     <a onclick="openBranches()" class="nav-cta">Наши филиалы</a>
   </nav>
   <div class="burger" id="burgerBtn" onclick="toggleMenu()">
@@ -322,8 +328,8 @@ footer ul li a:hover{color:var(--caramel);}
     <h1 class="hero-title">Пицца из <em>дровяной</em> печи.<br>Сыр собственного приготовления.<br>Вкус, который <em>запоминается.</em></h1>
     <p class="hero-sub">Приходи за кофе, оставайся за атмосферой. Мы обжариваем зёрна прямо здесь и делаем моцареллу каждое утро.</p>
     <div class="hero-btns">
-      <button class="btn-primary" onclick="scrollTo('#delivery')">Заказать доставку</button>
-      <button class="btn-outline" onclick="scrollTo('#menu')">Смотреть меню</button>
+      <button class="btn-primary" onclick="smoothScrollTo('#delivery')">Заказать доставку</button>
+      <button class="btn-outline" onclick="smoothScrollTo('#menu')">Смотреть меню</button>
     </div>
   </div>
   <div class="scroll-hint">
@@ -351,7 +357,7 @@ footer ul li a:hover{color:var(--caramel);}
         <span class="delivery-icon">🚀</span>
         <h3>Яндекс Еда</h3>
         <p>Удобный интерфейс, быстрые курьеры. Capito уже ждёт тебя на платформе.</p>
-        <a href="https://yandex.ru/maps/org/capito/135724075885/" target="_blank" class="btn-delivery">Заказать в Яндекс</a>
+        <a href="https://eda.yandex.kg/bishkek" target="_blank" class="btn-delivery">Заказать в Яндекс Еде</a>
       </div>
       <div class="delivery-card reveal reveal-delay-3">
         <span class="delivery-icon">💬</span>
@@ -453,7 +459,7 @@ footer ul li a:hover{color:var(--caramel);}
       <h5>Доставка</h5>
       <ul>
         <li><a href="https://glovoapp.com/kg/ru/bishkek/capito-coffee-bakery-pizza-bsk/" target="_blank">Glovo</a></li>
-        <li><a href="https://yandex.ru/maps/org/capito/135724075885/" target="_blank">Яндекс Еда</a></li>
+        <li><a href="https://eda.yandex.kg/bishkek" target="_blank">Яндекс Еда</a></li>
         <li><a href="https://wa.me/996558300000" target="_blank">WhatsApp</a></li>
       </ul>
     </div>
@@ -476,8 +482,8 @@ footer ul li a:hover{color:var(--caramel);}
 <!-- ─── BOTTOM NAV ─── -->
 <div class="bottom-nav">
   <div class="bottom-nav-grid">
-    <button class="bnav-item" onclick="scrollTo('#menu')"><i class="fas fa-utensils"></i><span>Меню</span></button>
-    <button class="bnav-item" onclick="scrollTo('#delivery')"><i class="fas fa-motorcycle"></i><span>Доставка</span></button>
+    <button class="bnav-item" onclick="smoothScrollTo('#menu')"><i class="fas fa-utensils"></i><span>Меню</span></button>
+    <button class="bnav-item" onclick="smoothScrollTo('#delivery')"><i class="fas fa-motorcycle"></i><span>Доставка</span></button>
     <button class="bnav-item" onclick="openBranches()"><i class="fas fa-map-marker-alt"></i><span>Филиалы</span></button>
     <button class="bnav-item" onclick="openCart()"><i class="fas fa-shopping-bag"></i><span>Корзина</span></button>
   </div>
@@ -500,7 +506,12 @@ footer ul li a:hover{color:var(--caramel);}
   </div>
   <div class="cart-footer" id="cartFooter" style="display:none;">
     <div class="cart-total"><span>Итого</span><span id="cartTotal">0 сом</span></div>
-    <button class="btn-checkout" onclick="checkoutWhatsApp()"><i class="fab fa-whatsapp"></i> Оформить через WhatsApp</button>
+    <p style="font-size:0.75rem;color:var(--muted);text-align:center;margin-bottom:12px;font-family:'Montserrat',sans-serif;letter-spacing:0.05em;">Выбери способ оформления:</p>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <button class="btn-checkout btn-checkout--glovo" onclick="checkoutGlovo()"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='18' height='18'%3E%3Ccircle cx='12' cy='12' r='12' fill='white'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-size='12' font-weight='900' fill='%2300A082'%3EG%3C/text%3E%3C/svg%3E" alt="Glovo" style="width:18px;height:18px;border-radius:50%;"> Оформить через Glovo</button>
+      <button class="btn-checkout btn-checkout--yandex" onclick="checkoutYandex()">🚀 Оформить через Яндекс Еду</button>
+      <button class="btn-checkout btn-checkout--wa" onclick="checkoutWhatsApp()"><i class="fab fa-whatsapp"></i> Оформить через WhatsApp</button>
+    </div>
   </div>
 </div>
 
@@ -539,79 +550,79 @@ const MENU = [
   {
     cat: "Пицца", emoji: "🍕",
     items: [
-      {name:"Маргарита",price:590,desc:"Классика жанра. Томатный соус, моцарелла собственного приготовления, базилик.",ingr:"Состав: тесто дровяной печи, томатный соус Сан-Марцано, моцарелла by Capito, свежий базилик, оливковое масло extra virgin.",img:"https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600&q=80",tag:"Бестселлер"},
+      {name:"Маргарита",price:610,desc:"Классика жанра. Томатный соус, моцарелла собственного приготовления, базилик.",ingr:"Состав: тесто дровяной печи, томатный соус Сан-Марцано, моцарелла by Capito, свежий базилик, оливковое масло extra virgin.",img:"https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600&q=80",tag:"Бестселлер"},
       {name:"Пепперони",price:690,desc:"Острая копчёная колбаса, много сыра, хрустящий борт из дровяной печи.",ingr:"Состав: тесто, томатный соус, моцарелла, телячья пепперони, оливковое масло.",img:"https://images.unsplash.com/photo-1628840042765-356cda07504e?w=600&q=80",tag:"Топ"},
-      {name:"4 сыра",price:750,desc:"Четыре вида сыра: моцарелла, горгонзола, пармезан, рикотта. Для тех, кто любит.",ingr:"Состав: тесто, сливочный соус, моцарелла, горгонзола, пармезан, рикотта, тимьян.",img:"https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&q=80"},
-      {name:"Карбонара",price:720,desc:"Сливочная основа, бекон, яичный желток. Паста? Нет — пицца!",ingr:"Состав: тесто, сливочный соус, бекон, яичный желток, пармезан, чёрный перец, петрушка.",img:"https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=600&q=80"},
-      {name:"BBQ с курицей",price:710,desc:"Копчёный соус BBQ, сочное куриное филе, красный лук, маринованные огурцы.",ingr:"Состав: тесто, соус BBQ, куриное филе, красный лук, корнишоны, моцарелла.",img:"https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80"},
-      {name:"Болоньезе",price:700,desc:"Сытная классика: рубленое мясо, томаты, базилик. Как в итальянской траттории.",ingr:"Состав: тесто, мясной соус болоньезе, моцарелла, пармезан, базилик.",img:"https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=600&q=80"},
+      {name:"4 сыра",price:735,desc:"Четыре вида сыра: моцарелла, горгонзола, пармезан, рикотта. Для тех, кто любит.",ingr:"Состав: тесто, сливочный соус, моцарелла, горгонзола, пармезан, рикотта, тимьян.",img:"https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&q=80"},
+      {name:"Карбонара",price:690,desc:"Сливочная основа, бекон, яичный желток. Паста? Нет — пицца!",ingr:"Состав: тесто, сливочный соус, бекон, яичный желток, пармезан, чёрный перец, петрушка.",img:"https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=600&q=80"},
+      {name:"BBQ с курицей",price:690,desc:"Копчёный соус BBQ, сочное куриное филе, красный лук, маринованные огурцы.",ingr:"Состав: тесто, соус BBQ, куриное филе, красный лук, корнишоны, моцарелла.",img:"https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80"},
+      {name:"Болоньезе",price:770,desc:"Сытная классика: рубленое мясо, томаты, базилик. Как в итальянской траттории.",ingr:"Состав: тесто, мясной соус болоньезе, моцарелла, пармезан, базилик.",img:"https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=600&q=80"},
     ]
   },
   {
     cat: "Завтраки", emoji: "🥐",
     items: [
-      {name:"Круассан с лососью",price:420,desc:"Хрустящий круассан, нежный лосось, сливочный сыр, каперсы, зелень.",ingr:"Состав: круассан, холодный копчёный лосось, сливочный сыр, каперсы, красный лук, укроп.",img:"https://images.unsplash.com/photo-1620921568258-e0c08e57e29e?w=600&q=80",tag:"Хит"},
-      {name:"Шакшука",price:370,desc:"Яйца, запечённые в пряном томатном соусе с болгарским перцем и фетой.",ingr:"Состав: яйца, томаты, болгарский перец, лук, чеснок, тмин, паприка, фета, свежая петрушка.",img:"https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=600&q=80"},
-      {name:"Скрэмбл со страчателлой",price:450,desc:"Нежные яйца, воздушная страчателла собственного производства, зелёный лук.",ingr:"Состав: яйца, страчателла by Capito, сливочное масло, зелёный лук, микрозелень, тост.",img:"https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&q=80",tag:"Capito"},
-      {name:"Гранола с йогуртом",price:320,desc:"Авторская гранола, греческий йогурт, сезонные ягоды и мёд.",ingr:"Состав: гранола с орехами, греческий йогурт, ягоды, мёд, семена чиа.",img:"https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38?w=600&q=80"},
-      {name:"Сырники с ягодами",price:380,desc:"Классические творожные сырники, жареные до золотистой корочки, со сметаной.",ingr:"Состав: творог, яйца, мука, сахар, ванилин, сметана, сезонные ягоды, варенье.",img:"https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=600&q=80"},
+      {name:"Круассан с семгой",price:690,desc:"Произведение пекарского искусства - свежеиспеченный слоистый круассан, приготовленный по старинной французско.",ingr:"Состав: круассан, холодный копчённая семга, сливочный сыр, каперсы, укроп.",img:"семга.jpg",tag:"Хит"},
+      {name:"Шакшука",price:440,desc:"Классический средиземноморскийзавтрак, запеченный в дровяной печи: яйца, свежие томаты, ароматный болгарский перец, красный лук, пита,свежая зелень, перец чили",ingr:"Состав: яйца, томаты, болгарский перец, лук, чеснок, тмин, паприка, фета, свежая петрушка.",img:"шукщуа.jpg"},
+      {name:"Рисовая каша",price:310,desc:"Настоящий вкус детства! Рисовая каша на основе молока и сливочного масла с добавлением карамелизированной тыквы, ягодного конфитюра и микрозелени",ingr:"Состав: яйца, страчателла by Capito, сливочное масло, зелёный лук, микрозелень, тост.",img:"рисовая каша.jpg",tag:"Capito"},
+      {name:"Тренди завтрак",price:720,desc:"Хрустящий круассан в сочетании с нежнейшей яичницей-скрэмбл, авокадо-пастой, слабосоленойсемгой Гравлакс, подается с микс-салатом",ingr:"Состав: гранола с орехами, греческий йогурт, ягоды, мёд, семена чиа.",img:"Тренди завтрак.jpg"},
+      {name:"Ирландский завтрак",price:380,desc:"Народный рецепт ирландских крестьян: сочные говяжьи сосиски, яичница глазунья, ломтики тост-хлеба, айсберг, салатный микс.",ingr:"Состав: творог, яйца, мука, сахар, ванилин, сметана, сезонные ягоды, варенье.",img:"Ирландский завтрак .jpg"},
     ]
   },
   {
     cat: "Салаты", emoji: "🥗",
     items: [
-      {name:"Цезарь с курицей",price:490,desc:"Хрустящий романо, гриль-курица, пармезан, крутоны, классический соус Цезарь.",ingr:"Состав: романо, куриное филе-гриль, пармезан, крутоны, соус Цезарь, анчоусы.",img:"https://images.unsplash.com/photo-1546793665-c74683f339c1?w=600&q=80"},
-      {name:"Капрезе с моцареллой",price:520,desc:"Томаты и моцарелла собственного приготовления, базилик, бальзамик.",ingr:"Состав: томаты черри и бычье сердце, моцарелла by Capito, базилик, оливковое масло, бальзамический крем.",img:"https://images.unsplash.com/photo-1608032364895-84a8ea3a39a2?w=600&q=80",tag:"Capito"},
-      {name:"Греческий",price:440,desc:"Свежие овощи, оливки, фета, орегано. Классика средиземноморья.",ingr:"Состав: томаты, огурцы, перец, красный лук, оливки Каламата, фета, орегано, оливковое масло.",img:"https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&q=80"},
-      {name:"С индейкой и авокадо",price:560,desc:"Нежная индейка из хоспера, спелый авокадо, микрозелень и лимонная заправка.",ingr:"Состав: индейка хоспер, авокадо, помидоры черри, микрозелень, семена кунжута, лимонная заправка.",img:"https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80"},
+      {name:"Салат с индейкой и рукколой с овощами",price:840,desc:"Вкусный ПП-салат с нежным филе индейки с авокадо, огурцами, рукколой и помидорами черри",ingr:"Состав: романо, куриное филе-гриль, пармезан, крутоны, соус Цезарь, анчоусы.",img:"Салат с индейкой и рукколой с овощами.jpeg"},
+      {name:"Салат Нисуаз",price:820,desc:"Легкий салат на основе консервированного тунца, свежих томатов, маслин, оливок и красного лука, заправленный оливковым маслом и ароматной апельсиновой заправкой",ingr:"Состав: томаты черри и бычье сердце, моцарелла by Capito, базилик, оливковое масло, бальзамический крем.",img:"Нисуаз.jpg",tag:"Capito"},
+      {name:"Греческий",price:560,desc:"Свежие овощи, оливки, фета, орегано. Классика средиземноморья.",ingr:"Состав: томаты, огурцы, перец, красный лук, оливки Каламата, фета, орегано, оливковое масло.",img:"https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&q=80"},
+      {name:"Салат с креветками",price:650,desc:"Полезнейший салат на основе авокадо, рукколы, айсберга, креветок и вяленых томатов черри в сочетании, заправленный оливковым маслом.",ingr:"Состав: индейка хоспер, авокадо, помидоры черри, микрозелень, семена кунжута, лимонная заправка.",img:"Салат с креветками.jpg"},
     ]
   },
   {
     cat: "Паста", emoji: "🍝",
     items: [
-      {name:"Спагетти Болоньезе",price:520,desc:"Медленно тушёный мясной соус, пармезан, свежий базилик. Никаких компромиссов.",ingr:"Состав: спагетти, говяжий фарш, томаты, красное вино, лук, морковь, сельдерей, пармезан.",img:"https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600&q=80"},
-      {name:"Пенне арабьята",price:480,desc:"Острый томатный соус с чесноком и перцем чили. Для тех, кто любит огонёк.",ingr:"Состав: пенне, томаты, чеснок, перец чили, оливковое масло, петрушка, пармезан.",img:"https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=600&q=80"},
-      {name:"Пенне с курицей",price:540,desc:"Нежная курица в сливочном соусе с вялеными томатами и шпинатом.",ingr:"Состав: пенне, куриное филе, вяленые томаты, шпинат, сливки, чеснок, пармезан.",img:"https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=600&q=80"},
-      {name:"Феттуччине грибное",price:560,desc:"Лесные грибы, трюфельное масло, пармезан. Богатый, насыщенный вкус.",ingr:"Состав: феттуччине, ассорти грибов, трюфельное масло, сливки, лук-шалот, пармезан, тимьян.",img:"https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=600&q=80"},
+      {name:"Спагетти Болоньезе",price:705,desc:"Медленно тушёный мясной соус, пармезан, свежий базилик. Никаких компромиссов.",ingr:"Состав: спагетти, говяжий фарш, томаты, красное вино, лук, морковь, сельдерей, пармезан.",img:"https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600&q=80"},
+      {name:"Пенне арабьята",price:565,desc:"Острый томатный соус с чесноком и перцем чили. Для тех, кто любит огонёк.",ingr:"Состав: пенне, томаты, чеснок, перец чили, оливковое масло, петрушка, пармезан.",img:"https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=600&q=80"},
+      {name:"Паста с курицей и грибами",price:720,desc:"Легкая и нежная паста на основе куриного филе, жареных шампиньонов, молодого шпината, ароматного сыра Пармезан и сливочного соуса",ingr:"Состав: пенне, куриное филе, вяленые томаты, шпинат, сливки, чеснок, пармезан.",img:"Паста с курицей и грибами.jpg"},
+      {name:"Паста с креветками",price:935,desc:"Вкуснейшая паста с креветками на основе томатногосоуса и сливок в сочетании с сыром пармезан,вялеными томатами черри и базиликом",ingr:"Состав: феттуччине, ассорти грибов, трюфельное масло, сливки, лук-шалот, пармезан, тимьян.",img:"Паста с креветками.jpg"},
     ]
   },
   {
     cat: "Сэндвичи", emoji: "🥪",
     items: [
       {name:"Мега-сэндвич с курицей",price:480,desc:"Хрустящая фокачча, куриное филе из печи, страчателла, руккола, вяленые томаты.",ingr:"Состав: фокачча из дровяной печи, куриное филе, страчателла, руккола, вяленые томаты, соус пesto.",img:"https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=600&q=80",tag:"Печь"},
-      {name:"Фокачча с песто",price:380,desc:"Воздушная фокачча собственной выпечки с соусом песто, моцареллой и базиликом.",ingr:"Состав: фокачча, соус генуэзское песто, моцарелла, черри, базилик.",img:"https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&q=80"},
+      {name:"Сэндвич с курицей",price:380,desc:"Сэндвич на основе свежеиспеченного багетного хлеба с прослойкой из нежного куриного филе на гриле, яиц, картофеля, свежих томатов, огурцов, айсберга и соуса Тартар.",ingr:"Состав: фокачча, соус генуэзское песто, моцарелла, черри, базилик.",img:"Сэндвич с курицей.jpg"},
       {name:"Бургер из печи",price:650,desc:"Телячья котлета, хрустящий лук, корнишоны, соус тартар. Выпечен в дровяной печи.",ingr:"Состав: булочка из печи, телячья котлета, помидор, корнишоны, красный лук, соус тартар, кетчуп.",img:"https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80"},
     ]
   },
   {
     cat: "Десерты", emoji: "🍰",
     items: [
-      {name:"Сан-Себастьян чизкейк",price:420,desc:"Нежный баскский чизкейк с обожжённой карамельной корочкой. Любовь с первого кусочка.",ingr:"Состав: сливочный сыр, яйца, сахар, сливки 33%, ванильный экстракт.",img:"https://images.unsplash.com/photo-1567171466295-4afa63d45416?w=600&q=80",tag:"Любимчик"},
-      {name:"Меренговый рулет",price:380,desc:"Нежная меренга, взбитые сливки, свежие ягоды. Лёгкий и воздушный.",ingr:"Состав: меренга, сливки, ягоды сезонные, лимонный курд.",img:"https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&q=80"},
-      {name:"Шоколадный торт",price:390,desc:"Влажный шоколадный бисквит, тёмный ганаш, малиновый конфитюр.",ingr:"Состав: шоколад 70%, яйца, мука, масло, сахар, малиновый конфитюр, ганаш.",img:"https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&q=80"},
-      {name:"Тарталетки с ягодами",price:350,desc:"Хрустящее песочное тесто, ванильный крем, свежие ягоды. Маленькое удовольствие.",ingr:"Состав: песочное тесто, ванильный крем патиссьер, клубника, черника, мята.",img:"https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=600&q=80"},
+      {name:"Сан-Себастьян чизкейк",price:340,desc:"Нежный баскский чизкейк с обожжённой карамельной корочкой. Любовь с первого кусочка.",ingr:"Состав: сливочный сыр, яйца, сахар, сливки 33%, ванильный экстракт.",img:"https://images.unsplash.com/photo-1567171466295-4afa63d45416?w=600&q=80",tag:"Любимчик"},
+      {name:"Меренговый рулет",price:300,desc:"Нежная меренга, взбитые сливки, свежие ягоды. Лёгкий и воздушный.",ingr:"Состав: меренга, сливки, ягоды сезонные, лимонный курд.",img:"Меренга фисташковая.jpg"},
+      {name:"Тирамису",price:310,desc:"Кофе, печенье савоярди, сахар, сливки, сыр маскарпоне, яйцо, какао..",ingr:"Состав: шоколад 70%, яйца, мука, масло, сахар, малиновый конфитюр, ганаш.",img:"Тирамису.jpg"},
+      {name:"Тарталетки с ягодами",price:330,desc:"Хрустящее песочное тесто, ванильный крем, свежие ягоды. Маленькое удовольствие.",ingr:"Состав: песочное тесто, ванильный крем патиссьер, клубника, черника, мята.",img:"Тарт ягодный.jpg"},
     ]
   },
   {
     cat: "Кофе", emoji: "☕",
     items: [
       {name:"Эспрессо",price:180,desc:"Двойная порция насыщенного эспрессо из зёрен собственной обжарки.",ingr:"Состав: 18 г кофе собственной обжарки Capito, вода 90°C.",img:"https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=600&q=80"},
-      {name:"Капучино",price:280,desc:"Эспрессо, горячее молоко, нежная молочная пена. Классика в лучшем виде.",ingr:"Состав: двойной эспрессо, цельное молоко 3.2%, молочная микропена.",img:"https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=600&q=80",tag:"Любимчик"},
-      {name:"Латте",price:300,desc:"Мягкий и кремовый. Больше молока, меньше кофе — нежный вкус на каждый день.",ingr:"Состав: двойной эспрессо, 200 мл цельного молока, молочная пена.",img:"https://images.unsplash.com/photo-1561882468-9110e03e0f78?w=600&q=80"},
-      {name:"Флэт уайт",price:310,desc:"Концентрированный вкус кофе с шёлковой текстурой молока. Для ценителей.",ingr:"Состав: ристретто двойной, 100 мл молока micro-foam.",img:"https://images.unsplash.com/photo-1577968897966-3d4325b36b61?w=600&q=80"},
-      {name:"Раф кофе",price:340,desc:"Эспрессо, сливки и ванильный сахар — взбитые до однородности. Нежно и сладко.",ingr:"Состав: эспрессо, сливки 10%, ванильный сахар — взбивается вместе в питчере.",img:"https://images.unsplash.com/photo-1541167760496-1628856ab772?w=600&q=80"},
-      {name:"Айс латте",price:320,desc:"Классический латте на льду. Освежающий и бодрящий в любую погоду.",ingr:"Состав: двойной эспрессо, лёд, холодное молоко.",img:"https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=600&q=80"},
-      {name:"Холодный брю",price:350,desc:"Кофе, настоянный холодным способом 12 часов. Мягкий, без кислинки.",ingr:"Состав: кофе грубого помола, холодная фильтрованная вода, 12-часовое настаивание.",img:"https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=600&q=80"},
+      {name:"Капучино",price:250,desc:"Эспрессо, горячее молоко, нежная молочная пена. Классика в лучшем виде.",ingr:"Состав: двойной эспрессо, цельное молоко 3.2%, молочная микропена.",img:"https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=600&q=80",tag:"Любимчик"},
+      {name:"Латте",price:280,desc:"Мягкий и кремовый. Больше молока, меньше кофе — нежный вкус на каждый день.",ingr:"Состав: двойной эспрессо, 200 мл цельного молока, молочная пена.",img:"https://images.unsplash.com/photo-1561882468-9110e03e0f78?w=600&q=80"},
+      {name:"Флэт уайт",price:260,desc:"Концентрированный вкус кофе с шёлковой текстурой молока. Для ценителей.",ingr:"Состав: ристретто двойной, 100 мл молока micro-foam.",img:"https://images.unsplash.com/photo-1577968897966-3d4325b36b61?w=600&q=80"},
+      {name:"Раф кофе",price:390,desc:"Эспрессо, сливки и ванильный сахар — взбитые до однородности. Нежно и сладко.",ingr:"Состав: эспрессо, сливки 10%, ванильный сахар — взбивается вместе в питчере.",img:"https://images.unsplash.com/photo-1541167760496-1628856ab772?w=600&q=80"},
+      {name:"Айс латте",price:270,desc:"Классический латте на льду. Освежающий и бодрящий в любую погоду.",ingr:"Состав: двойной эспрессо, лёд, холодное молоко.",img:"https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=600&q=80"},
+      {name:"Мокко Карамель",price:330,desc:"Кофе Мягкий, без кислинки.",ingr:"Состав: кофе грубого помола, холодная фильтрованная вода, 12-часовое настаивание.",img:"Мокко Карамель.jpg"},
     ]
   },
   {
     cat: "Напитки", emoji: "🥤",
     items: [
-      {name:"Матча латте",price:320,desc:"Японская церемониальная матча, взбитая с молоком. Зелёный, бодрящий, ароматный.",ingr:"Состав: матча церемониальный сорт, молоко, сироп по желанию.",img:"https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=600&q=80"},
-      {name:"Малиновый лимонад",price:290,desc:"Свежевыжатый лимон, малиновый сироп, газированная вода и мята.",ingr:"Состав: лимон свежий, малиновый сироп, газированная вода, мята.",img:"https://images.unsplash.com/photo-1497534446932-c925b458314e?w=600&q=80"},
-      {name:"Какао с маршмеллоу",price:310,desc:"Насыщенное бельгийское какао, взбитые сливки и воздушные маршмеллоу.",ingr:"Состав: какао Callebaut, молоко, сахар, маршмеллоу, взбитые сливки.",img:"https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=600&q=80"},
-      {name:"Смузи ягодный",price:350,desc:"Смесь сезонных ягод, банан, йогурт. Густой, свежий, без добавленного сахара.",ingr:"Состав: клубника, черника, банан, греческий йогурт, мёд.",img:"https://images.unsplash.com/photo-1638176066666-ffb2f013c7dd?w=600&q=80"},
-      {name:"Глинтвейн",price:380,desc:"Согревающий красный глинтвейн с корицей, гвоздикой и апельсином.",ingr:"Состав: красное вино, апельсин, корица, гвоздика, анис, мёд.",img:"https://images.unsplash.com/photo-1482012792084-a0c3725f289f?w=600&q=80"},
+      {name:"Матча латте",price:360,desc:"Японская церемониальная матча, взбитая с молоком. Зелёный, бодрящий, ароматный.",ingr:"Состав: матча церемониальный сорт, молоко, сироп по желанию.",img:"https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=600&q=80"},
+      {name:"Малиновый-маракуйя лимонад",price:520,desc:"Свежевыжатый лимон, малиновый сироп, газированная вода и мята.",ingr:"Состав: лимон свежий, малиновый сироп, газированная вода, мята.",img:"https://images.unsplash.com/photo-1497534446932-c925b458314e?w=600&q=80"},
+      {name:"Какао с маршмеллоу",price:260,desc:"Насыщенное бельгийское какао, взбитые сливки и воздушные маршмеллоу.",ingr:"Состав: какао Callebaut, молоко, сахар, маршмеллоу, взбитые сливки.",img:"https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=600&q=80"},
+      {name:"Смузи Смузи Зеленый",price:360,desc:" банан, йогурт. Густой, свежий, без добавленного сахара.",ingr:"Состав: клубника, черника, банан, греческий йогурт, мёд.",img:"https://images.unsplash.com/photo-1638176066666-ffb2f01"},
+      {name:"Фрапучино шоколадный",price:360,desc:"освежающий ледяной кофейный коктейль из эспрессо, молока, льда и шоколадного сиропа, взбитых до кремообразной текстуры.",ingr:"Состав: чай улун, молоко, клубничный сироп, шарики тапиоки, лёд.",img:"фрапо.jpg",tag:"Новинка"},
     ]
   },
 ];
@@ -692,6 +703,14 @@ function checkoutWhatsApp(){
   window.open(`https://wa.me/996558300000?text=${msg}`,'_blank');
 }
 
+function checkoutGlovo(){
+  window.open('https://glovoapp.com/kg/ru/bishkek/capito-coffee-bakery-pizza-bsk/','_blank');
+}
+
+function checkoutYandex(){
+  window.open('https://eda.yandex.kg/bishkek','_blank');
+}
+
 // ─── WHATSAPP ───
 function sendWhatsApp(){
   const txt=document.getElementById('waText').value.trim();
@@ -737,7 +756,7 @@ function switchTab(i){
 
 function switchTabByName(name){
   const idx=MENU.findIndex(c=>c.cat===name);
-  if(idx>=0){scrollTo('#menu');setTimeout(()=>switchTab(idx),400);}
+  if(idx>=0){smoothScrollTo('#menu');setTimeout(()=>switchTab(idx),400);}
 }
 
 // ─── MODAL ───
@@ -837,9 +856,10 @@ const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');}});
 },{threshold:0.12});
 
-// ─── SCROLL TO ───
-function scrollTo(target){
-  document.querySelector(target)?.scrollIntoView({behavior:'smooth'});
+// ─── SCROLL TO (renamed to avoid native window.scrollTo conflict) ───
+function smoothScrollTo(target){
+  const el = document.querySelector(target);
+  if(el) el.scrollIntoView({behavior:'smooth'});
 }
 
 // ─── MOBILE MENU ───
@@ -857,6 +877,13 @@ function toggleMenu(){
     spans.forEach(s=>s.style.cssText='');
     document.body.style.overflow='';
   }
+}
+function closeMobileMenu(){
+  const nav=document.getElementById('nav');
+  const btn=document.getElementById('burgerBtn');
+  nav.classList.remove('open');
+  btn.querySelectorAll('span').forEach(s=>s.style.cssText='');
+  document.body.style.overflow='';
 }
 
 // ─── TOAST ───
